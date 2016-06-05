@@ -34,7 +34,9 @@ public class ListImgAdapter extends ArrayAdapter<String> {
         view.setImageResource(R.drawable.pictures_no);
 
         mLoader.loadImage(getItem(position), view, true);
-        Log.e("demonk", "pos=" + position);
+
+        if (position == 0)
+            Log.e("demonk", "pos=" + position);
         return convertView;
 
     }

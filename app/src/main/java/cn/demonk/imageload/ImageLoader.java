@@ -96,7 +96,7 @@ public class ImageLoader {
             };
         }
 
-        Bitmap bm = getBitmapFromLruCache(path);
+        Bitmap bm = null;//getBitmapFromLruCache(path);
         if (bm != null) {
             refreshBitmap(path, imageView, bm);
         } else {

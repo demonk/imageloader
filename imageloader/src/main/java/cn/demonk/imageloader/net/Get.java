@@ -1,6 +1,10 @@
 package cn.demonk.imageloader.net;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.io.IOException;
+import java.io.InputStream;
 
 import cn.demonk.baseutils.log.LogUtil;
 import cn.demonk.baseutils.str.StringUtil;
@@ -31,5 +35,26 @@ public class Get {
             LogUtil.i("header --> " + responseHeaders.name(i) + " : " + responseHeaders.value(i));
         }
         LogUtil.d(response.body().toString());
+    }
+
+    /**
+     * 从远程获取一个图像
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    public static Bitmap getBitmap(String url) throws IOException {
+        OkHttpClient client = NetWorker.instance().getClient();
+        Bitmap bm = null;
+
+        if (!StringUtil.isEmpty(url)) {
+            Request req = new Request.Builder().url(url).build();
+            Response resp = client.newCall(req).execute();
+
+            InputStream input = resp.body().byteStream();
+            bm = BitmapFactory.decodeStream(input);
+        }
+
+        return bm;
     }
 }
